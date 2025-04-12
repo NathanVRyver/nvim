@@ -85,24 +85,31 @@ require("lazy").setup {
   -- code companion
   {
     "olimorris/codecompanion.nvim",
-    cmd = "CodeCompanion",
-    event = "InsertEnter",
-    config = function()
-      require("codecompanion").setup({
-        provider = "anthropic",
-        anthropic = {
-          api_key = os.getenv("ANTHROPIC_API_KEY"),
-          model = "claude-3-7-sonnet-20241022", -- 🔥 we're going bankrupt with this
-        },
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 75,
-          accept_keymap = "<C-l>",
-        },
-        log_level = "INFO",
-      })
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      strategies = {
+        inline = { adapter = "anthropic" },
+        chat = { adapter = "anthropic" },
+      },
+      anthropic = {
+        api_key = os.getenv("ANTHROPIC_API_KEY"),
+        model = "claude-3-7-sonnet-20241022",
+      },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        debounce = 75,
+        accept_keymap = "<C-l>", -- Accept suggestion with Ctrl+L
+      },
+      log_level = "DEBUG",
+    },
+    config = function(_, opts)
+      require("codecompanion").setup(opts)
+      vim.notify("🧠 Claude 3.7 online. This crap works", vim.log.levels.INFO)
     end,
-    dependencies = { "nvim-lua/plenary.nvim" },
   }
 }

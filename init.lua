@@ -11,6 +11,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
     )
   end,
 })
+--- debug keys
+vim.notify("TOKEN = " .. tostring(os.getenv("GITHUB_TOKEN")), vim.log.levels.INFO)
+
 --- auto stop the damn music after we quit nvim
 vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = function()
