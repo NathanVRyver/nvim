@@ -110,6 +110,14 @@ require("lazy").setup {
     config = function(_, opts)
       require("codecompanion").setup(opts)
       vim.notify("🧠 Claude 3.7 online. This crap works", vim.log.levels.INFO)
+      -- Claude Token Tracker 💸
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "CodeCompanionTokensUsed",
+        callback = function(args)
+          local tokens = args.data and args.data.tokens or 0
+          vim.notify("🧾 Claude used " .. tokens .. " tokens in that suggestion", vim.log.levels.INFO)
+        end,
+      })
     end,
   }
 }
