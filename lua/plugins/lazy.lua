@@ -84,23 +84,25 @@ require("lazy").setup {
   },
   -- code companion
   {
-    "Codingdino/codecompanion.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "olimorris/codecompanion.nvim",
+    cmd = "CodeCompanion",
     event = "InsertEnter",
     config = function()
       require("codecompanion").setup({
         provider = "anthropic",
         anthropic = {
           api_key = os.getenv("ANTHROPIC_API_KEY"),
-          model = "claude-3-sonnet-20240229",
+          model = "claude-3-7-sonnet-20241022", -- 🔥 we're going bankrupt with this
         },
         suggestion = {
+          enabled = true,
           auto_trigger = true,
+          debounce = 75,
           accept_keymap = "<C-l>",
-          debounce = 100,
         },
+        log_level = "INFO",
       })
     end,
+    dependencies = { "nvim-lua/plenary.nvim" },
   }
-
 }
