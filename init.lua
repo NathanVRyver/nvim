@@ -11,3 +11,12 @@ vim.api.nvim_create_autocmd("VimEnter", {
     )
   end,
 })
+
+
+vim.api.nvim_create_user_command("PauseMusic", function()
+  vim.fn.system("pkill -STOP mpv")
+end, {})
+
+vim.api.nvim_create_user_command("PlayMusic", function()
+  vim.fn.system("pkill -CONT mpv")
+end, {})
