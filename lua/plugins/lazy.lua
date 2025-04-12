@@ -10,6 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
   }
 end
 vim.opt.rtp:prepend(lazypath)
+
 require("lazy").setup {
   { "rose-pine/neovim", name = "rose-pine" },
   { "nvim-tree/nvim-tree.lua" },
@@ -18,4 +19,9 @@ require("lazy").setup {
   { "nvim-tree/nvim-web-devicons" },
   { "goolord/alpha-nvim" },
   { "folke/which-key.nvim" },
+
+  -- 🧠 LSP Setup
+  { "neovim/nvim-lspconfig" },
+  { "williamboman/mason.nvim" },
+  { "williamboman/mason-lspconfig.nvim" },
 }
