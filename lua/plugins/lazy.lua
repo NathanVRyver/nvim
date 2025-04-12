@@ -36,5 +36,71 @@ require("lazy").setup {
   {
     "giusgad/pets.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
+  },
+
+  -- avante
+  {
+    "yetone/avante.nvim",
+    lazy = false,
+    version = false,
+    build = "make",
+    priority = 1000,
+    opts = {
+      provider = "openai",
+      openai = {
+        endpoint = "https://api.openai.com/v1",
+        model = "gpt-4o",
+        timeout = 30000,
+        temperature = 0,
+        max_completion_tokens = 8192,
+      },
+    },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "hrsh7th/nvim-cmp",
+      "nvim-tree/nvim-web-devicons",
+      "nvim-telescope/telescope.nvim",
+      {
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = { insert_mode = true },
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = { file_types = { "markdown", "Avante" } },
+        ft = { "markdown", "Avante" },
+      },
+    },
+  },
+  -- code companion
+  {
+    "Codingdino/codecompanion.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    event = "InsertEnter",
+    config = function()
+      require("codecompanion").setup({
+        provider = "anthropic",
+        anthropic = {
+          api_key = os.getenv("ANTHROPIC_API_KEY"),
+          model = "claude-3-sonnet-20240229",
+        },
+        suggestion = {
+          auto_trigger = true,
+          accept_keymap = "<C-l>",
+          debounce = 100,
+        },
+      })
+    end,
   }
+
 }
