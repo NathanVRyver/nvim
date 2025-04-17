@@ -22,23 +22,24 @@ Welcome to the most cursed Neovim config you'll ever see.
 | `:StopMusic`    | Stop and purge the vibes                     |
 
 Make sure you have the tracks in:
-
-```text
+```
 ~/.config/nvim/assets/
 ├── lofi.mp3
 ├── nightcore.mp3
-└── yamete-kudasai.mp3 
+└── yamete-kudasai.mp3
+```
+
 🐾 Pets
 Just type:
 
-vim
-Copy
-Edit
+```
 :Doggo
 :Catto
 :Bunbun
 :Frogchamp
 :RMPets  -- to remove them
+```
+
 ⚠️ Requirements
 mpv (install via brew install mpv)
 
@@ -49,7 +50,8 @@ curl, plenary.nvim, treesitter
 A valid Claude API key in your ~/.zshrc or bashrc if you're using bash:
 
 export ANTHROPIC_API_KEY="sk-ant-🔥-insert"
-🚀 Quickstart
+🚀 Quickstart:
+
 ```
 git clone https://github.com/NathanVRyver/nvim-new.git ~/.config/nvim
 cd ~/.config/nvim
