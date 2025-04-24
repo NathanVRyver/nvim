@@ -16,9 +16,16 @@ require("lazy").setup {
   { "nvim-tree/nvim-tree.lua" },
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
+    },
     config = function()
-      require("telescope").setup({
+      local telescope = require("telescope")
+
+      telescope.load_extension("fzf")
+
+      telescope.setup({
         defaults = {
           file_ignore_patterns = {
             "venv/", "node_modules/", "build/", "dist/", "%.lock", "%.git/", "__pycache__/",
@@ -39,7 +46,23 @@ require("lazy").setup {
             "--glob", "!build/"
           },
         },
+        pickers = {
+          live_grep = {
+            -- Use files-with-matches to only show each file once
+            additional_args = function()
+              return { "--files-with-matches" }
+            end
+          }
+        }
       })
+
+      -- Create a custom command for files with matches
+      local builtin = require('telescope.builtin')
+      vim.api.nvim_create_user_command('TelescopeFilesWithMatches', function(opts)
+        builtin.live_grep({
+          additional_args = { "--files-with-matches" }
+        })
+      end, {})
     end
   }
   , { "nvim-lualine/lualine.nvim" },
