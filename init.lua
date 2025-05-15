@@ -31,11 +31,6 @@ vim.api.nvim_create_user_command("PlayNightcore", function()
   play_music(vim.fn.expand("~/.config/nvim/assets/nightcore.mp3"))
 end, {})
 
--- 🍑 Hentai Sounds (peak creativity?)
-vim.api.nvim_create_user_command("PlayDegenerate", function()
-  play_music(vim.fn.expand("~/.config/nvim/assets/yamete-kudasai.mp3"))
-end, {})
-
 -- 🛑 Pause / Resume
 vim.api.nvim_create_user_command("PauseMusic", function()
   vim.fn.system("pkill -STOP mpv")

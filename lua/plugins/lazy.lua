@@ -11,6 +11,23 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.cmd [[
+      highlight Normal guibg=NONE ctermbg=NONE
+      highlight NormalNC guibg=NONE ctermbg=NONE
+      highlight Pmenu guibg=NONE ctermbg=NONE
+      highlight FloatBorder guibg=NONE ctermbg=NONE
+      highlight NormalFloat guibg=NONE ctermbg=NONE
+      highlight TelescopeNormal guibg=NONE
+      highlight TelescopeBorder guibg=NONE
+    ]]
+  end,
+})
+
+
 require("lazy").setup {
   { "rose-pine/neovim",       name = "rose-pine" },
   { "nvim-tree/nvim-tree.lua" },
